@@ -5,6 +5,7 @@ BUILD_ARGUMENTS=""
 DEPENDENCIES=(docker)
 UPDATE_BASE=false
 REPOSIITORY_NAME="docker-cron"
+VERSION=""
 
 # help message
 for ARGUMENT in "$@"; do
@@ -53,6 +54,7 @@ if [[ "$UPDATE_BASE" == true ]]; then
         exit;
     fi
 fi
+VERSION="$(cat Version.txt)"
 
-export BASE_IMAGE BASE_IMAGE_DATE IMAGE
+export BASE_IMAGE BASE_IMAGE_DATE IMAGE VERSION
 docker buildx bake --file docker-bake.hcl $BUILD_ARGUMENTS
