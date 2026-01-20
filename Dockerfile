@@ -1,12 +1,10 @@
 FROM madebytimo/base
 
-RUN apt update && apt install -y cron && rm -rf /var/lib/apt/lists/*
+RUN apt update -qq && apt install -y -qq cron \
+    && rm -rf /var/lib/apt/lists/* \
+    \
+    && mkdir --parents /media/cron \
+    && rm --recursive /etc/cron.d \
+    && ln --symbolic --force --no-target-directory /media/cron/ /etc/cron.d
 
-RUN mkdir --parents /media/cron
-
-RUN rm --recursive /etc/cron.d
-
-COPY entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "sleep", "infinity" ]
+CMD [ "cron", "-f" ]

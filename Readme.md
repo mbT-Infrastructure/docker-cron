@@ -2,20 +2,27 @@
 
 This Docker image contains a Cron instalation.
 
-It enables you to schedule cronjobs.
+It enables you to schedule cronjobs via mounted crontabs.
 
+## Installation
 
-## Volumes
+1. Pull from [Docker Hub], download the package from [Releases] or build using `builder/build.sh`
 
-To import your crontabs you can define a volume. The volume has to be mounted at
+## Usage
+
+### Volumes
 
 - `/media/cron`
     - Contains all crontabs. Mount all your crontabs into this folder.
 
-
 ## Development
 
-To build the image locally run:
+To build and run the docker container for development execute:
+
 ```bash
-./docker-build.sh
+docker compose --file docker-compose-dev.yaml up --build
 ```
+
+[base image]: https://github.com/mbT-Infrastructure/docker-base
+[Docker Hub]: https://hub.docker.com/r/madebytimo/cron
+[Releases]: https://github.com/mbT-Infrastructure/docker-cron/releases
