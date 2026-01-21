@@ -3,7 +3,12 @@ services:
   cron:
     container_name: cron
     build: .
+    command: bash -c
+        "echo '* * * * * root echo Here is cron > /proc/1/fd/1' > /media/cron/test && run-cron.sh"
     mem_limit: 20M
     read_only: true
     tmpfs:
         - /media/cron
+        - /run
+        - /tmp:exec
+    network_mode: none
